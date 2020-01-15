@@ -6,7 +6,7 @@ bus = smbus2.SMBus(1)
 
 address = 0x05
 
-files = ["data_pha.json", "data_sfp.json"]
+files = ["data_sfp.json", "data_pha.json"]
 
 def parse_departure(json_response):
 	return json_response['data']['monitors'][0]['lines'][0]['departures']['departure']	
@@ -23,42 +23,32 @@ def readNumber():
     number = bus.read_byte(address)
     return number
 
-
-
-with open("data_pha.json") as f:
-    data = json.load(f)
-    f.close()
-
-
 current_timestamp = parse_date(datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')) 
 
-countdown = -1
+for file in files:
 
-	
+    with open(file) as f:
+        data = json.load(f)
+        f.close()
 
-for departure in parse_departure(data):
-    timeRealReadable = str(departure['departureTime']['timeReal'])[:-9]
-    timeReal = parse_date(timeRealReadable)
+    countdown = -1
 
-    if (current_timestamp <= timeReal):
-        print("Next bim:")
-        print(timeRealReadable)
-        print("in x minutes:")
-        countdown = (timeReal - current_timestamp) / 60
-        print(countdown)
-    
-        writeNumber(countdown)
-        print("Raspberry sends: ", countdown)
-        time.sleep(1)
+    for departure in parse_departure(data):
+        timeRealReadable = str(departure['departureTime']['timeReal'])[:-9]
+        timeReal = parse_date(timeRealReadable)
 
-        received = readNumber()
-        print("Arduino sends: ", received)
+        if (current_timestamp <= timeReal):
+            countdown = (timeReal - current_timestamp) / 60
+            print(countdown)
+        
+            writeNumber(countdown)
+            print("Raspberry sends: ", countdown)
+            time.sleep(1)
 
+            received = readNumber()
+            print("Arduino sends: ", received)
 
-
-
-
-        break
+            break
 
 
 
