@@ -29,12 +29,15 @@ rbl_sfp = 172 # richtung stefan fadinger platz
 response = requests.get(monitor_url, params=[("rbl", rbl_pha)])
 
 print(parse_status_code(response.status_code))
+response_json = response.json()
 
-departures = parse_departure(response.json())
 
-for departure in departures:
-	print(departure["departureTime"])
+with open('data.json', 'w') as f:
+    json.dump(response_json, f)
 
+#departures = parse_departure(response_json)
+#for departure in departures:
+#	print(departure["departureTime"])
 
 
 
