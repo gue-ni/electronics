@@ -21,6 +21,7 @@ with open("data.json") as f:
 
 current_timestamp = parse_date(datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')) 
 
+countdown = -1
 
 for departure in parse_departure(data):
     timeRealReadable = str(departure['departureTime']['timeReal'])[:-9]
@@ -34,29 +35,8 @@ for departure in parse_departure(data):
         print(countdown)
         break
 
-
-
-
-"""
-def writeNumber(value):
-    bus.write_byte(address, value)
-    return -1
-
-def readNumber():
-    number = bus.read_byte(address)
-    return number
-
-while True:
-    send = input("Number between 1 - 9: ")
-    if not send:
-        continue
-
-    writeNumber(send)
-    print("Raspberry sends: ", send)
-    time.sleep(1)
-
-    received = readNumber()
-    print("Arduino sends: ", received)
-
-"""
-
+writeNumber(countdown)
+print("Raspberry sends: ", countdown)
+time.sleep(1)
+received = readNumber()
+print("Arduino sends: ", received)
