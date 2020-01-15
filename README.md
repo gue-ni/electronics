@@ -4,9 +4,9 @@
 ## Abfahrtsmonitor
 
 ### Circuits
-Pi GPiO 2 (SDA) - Arduino A4 (SDA) \
-Pi GPiO 3 (SCL) - Arduino A5 (SCL) \ 
-Pi GND 		- Arduino GND \
+Pi GPiO 2 (SDA) - Arduino A4 (SDA)   
+Pi GPiO 3 (SCL) - Arduino A5 (SCL)  
+Pi GND 		- Arduino GND  
 
 https://www.data.gv.at/katalog/api/3/action/package_show?id=add66f20-d033-4eee-b9a0-47019828e698
 https://www.data.gv.at/katalog/dataset/stadt-wien_wienerlinienechtzeitdaten
