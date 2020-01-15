@@ -50,7 +50,9 @@ for file in files:
             time.sleep(1)
             received = readNumber()
             print("Arduino sends: ", received)
+            time.sleep(2)
             break
+            
 
 
 
