@@ -12,6 +12,14 @@ def parse_departure(json_response):
 def parse_date(string):
     return int(datetime.datetime.strptime(string, '%Y-%m-%dT%H:%M:%S').strftime("%s"))
 
+def writeNumber(value):
+    bus.write_byte(address, value)
+    return -1
+
+def readNumber():
+    number = bus.read_byte(address)
+    return number
+
 
 
 with open(file) as f:
@@ -33,22 +41,19 @@ for departure in parse_departure(data):
         print("in x minutes:")
         countdown = (timeReal - current_timestamp) / 60
         print(countdown)
+    
+        writeNumber(countdown)
+        print("Raspberry sends: ", countdown)
+        time.sleep(1)
+
+        received = readNumber()
+        print("Arduino sends: ", received)
+
+
+
+
+
         break
 
-def writeNumber(value):
-    bus.write_byte(address, value)
-    return -1
-
-def readNumber():
-    number = bus.read_byte(address)
-    return number
-
-
-writeNumber(countdown)
-print("Raspberry sends: ", countdown)
-time.sleep(1)
-
-received = readNumber()
-print("Arduino sends: ", received)
 
 
