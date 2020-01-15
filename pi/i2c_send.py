@@ -2,7 +2,7 @@ import smbus2
 import time
 import json
 import datetime
-#bus = smbus2.SMBus(1)
+bus = smbus2.SMBus(1)
 
 address = 0x05
 def parse_departure(json_response):
@@ -36,7 +36,28 @@ for departure in parse_departure(data):
         break
 
 writeNumber(countdown)
-print("Raspberry sends: ", countdown)
+writeNumber(send)
+print("Raspberry sends: ", send)
 time.sleep(1)
+
 received = readNumber()
 print("Arduino sends: ", received)
+
+
+def writeNumber(value):
+    bus.write_byte(address, value)
+    return -1
+
+def readNumber():
+    number = bus.read_byte(address)
+    return number
+
+
+writeNumber(countdown)
+print("Raspberry sends: ", countdown)
+time.sleep(1)
+
+received = readNumber()
+print("Arduino sends: ", received)
+
+
