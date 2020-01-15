@@ -39,7 +39,7 @@ for file in files:
 
         if (current_timestamp <= timeReal):
             countdown = (timeReal - current_timestamp) / 60
-            print(countdown)
+            print("{file} in {} minutes".format(file, countdown))
         
             writeNumber(countdown)
             print("Raspberry sends: ", countdown)
