@@ -2,7 +2,7 @@ import smbus2
 import time
 import json
 import datetime
-#bus = smbus2.SMBus(1)
+bus = smbus2.SMBus(1)
 
 address = 0x05
 def parse_departure(json_response):
