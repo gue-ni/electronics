@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 base_url = "https://www.wienerlinien.at/ogd_realtime"
 monitor_url = "{}/monitor".format(base_url)
@@ -31,13 +32,20 @@ response = requests.get(monitor_url, params=[("rbl", rbl_pha)])
 print(parse_status_code(response.status_code))
 response_json = response.json()
 
+with open('data_pha.json', 'w') as f:
+	json.dump(response_json, f)
+	f.close()
 
-with open('data.json', 'w') as f:
-    json.dump(response_json, f)
+time.sleep(20)
 
-#departures = parse_departure(response_json)
-#for departure in departures:
-#	print(departure["departureTime"])
+response = requests.get(monitor_url, params=[("rbl", rbl_sfp)])
+
+print(parse_status_code(response.status_code))
+response_json = response.json()
+
+with open('data_sfp.json', 'w') as f:
+	json.dump(response_json, f)
+	f.close()
 
 
 

@@ -14,7 +14,7 @@ def parse_date(string):
 
 
 
-with open("data.json") as f:
+with open(file) as f:
     data = json.load(f)
     f.close()
 
@@ -34,15 +34,6 @@ for departure in parse_departure(data):
         countdown = (timeReal - current_timestamp) / 60
         print(countdown)
         break
-
-writeNumber(countdown)
-writeNumber(send)
-print("Raspberry sends: ", send)
-time.sleep(1)
-
-received = readNumber()
-print("Arduino sends: ", received)
-
 
 def writeNumber(value):
     bus.write_byte(address, value)
