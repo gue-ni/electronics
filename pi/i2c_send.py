@@ -35,14 +35,6 @@ for departure in parse_departure(data):
         print(countdown)
         break
 
-writeNumber(countdown)
-writeNumber(send)
-print("Raspberry sends: ", send)
-time.sleep(1)
-
-received = readNumber()
-print("Arduino sends: ", received)
-
 
 def writeNumber(value):
     bus.write_byte(address, value)
