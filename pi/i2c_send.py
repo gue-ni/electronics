@@ -22,7 +22,7 @@ def readNumber():
 
 
 
-with open(file) as f:
+with open("data_pha.json") as f:
     data = json.load(f)
     f.close()
 
