@@ -11,7 +11,6 @@ files = ["data_sfp.json", "data_pha.json"]
 def parseDeparture(json_response):
 	return json_response['data']['monitors'][0]['lines'][0]['departures']['departure']	
 
-
 def parseDate(string):
     return int(datetime.datetime.strptime(string, '%Y-%m-%dT%H:%M:%S').strftime("%s"))
 
