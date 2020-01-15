@@ -36,7 +36,7 @@ with open('data_pha.json', 'w') as f:
 	json.dump(response_json, f)
 	f.close()
 
-time.sleep(20)
+time.sleep(5)
 
 response = requests.get(monitor_url, params=[("rbl", rbl_sfp)])
 
