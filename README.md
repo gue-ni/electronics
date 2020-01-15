@@ -10,7 +10,13 @@ Pi GPiO 3 (SCL) - Arduino A5 (SCL)
 Pi GND 		- Arduino GND  
 
 #### Lora
-E32 M0
+Arduino Pin 4 - E32 M0  
+Arduino Pin 5 - E32 M1  
+Arduino Pin 3 - 4k7 Ohm Resitor - E32 RXD  
+Arduino Pin 2 - 4k7 Ohm Resitor - E32 TXD  
+Arduino Pin 6 - 4k7 Ohm Resitor - E32 AUX  
+Arduino 3.3V - E32 VCC   
+Arduino GND - E32 GND  
 
 
 https://www.data.gv.at/katalog/api/3/action/package_show?id=add66f20-d033-4eee-b9a0-47019828e698
