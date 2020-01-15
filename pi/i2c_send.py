@@ -1,6 +1,6 @@
-import smbus
+import smbus2
 import time
-bus = smbus.SMBus(1)
+bus = smbus2.SMBus(1)
 
 address = 0x05
 
