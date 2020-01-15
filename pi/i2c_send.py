@@ -13,16 +13,16 @@ def readNumber():
     return number
 
 while True:
-    senden = input("Zahl zwischen 1 - 9: ")
-    if not senden:
+    send = input("Number between 1 - 9: ")
+    if not send:
         continue
 
-    writeNumber(senden)
-    print("Raspberry Schickt folgende Zahl: ", senden)
+    writeNumber(send)
+    print("Raspberry sends: ", send)
     time.sleep(1)
 
-    empfang = readNumber()
-    print("Der Arduino empfengt/schickt folgende Zahl: ", empfang)
+    received = readNumber()
+    print("Arduino sends: ", received)
 
 
 
