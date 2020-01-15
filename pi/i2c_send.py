@@ -8,11 +8,11 @@ address = 0x05
 
 files = ["data_sfp.json", "data_pha.json"]
 
-def parse_departure(json_response):
+def parseDeparture(json_response):
 	return json_response['data']['monitors'][0]['lines'][0]['departures']['departure']	
 
 
-def parse_date(string):
+def parseDate(string):
     return int(datetime.datetime.strptime(string, '%Y-%m-%dT%H:%M:%S').strftime("%s"))
 
 def writeNumber(value):
@@ -23,7 +23,7 @@ def readNumber():
     number = bus.read_byte(address)
     return number
 
-current_timestamp = parse_date(datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')) 
+current_timestamp = parseDate(datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')) 
 
 for file in files:
 
@@ -33,9 +33,9 @@ for file in files:
 
     countdown = -1
 
-    for departure in parse_departure(data):
+    for departure in parseDeparture(data):
         timeRealReadable = str(departure['departureTime']['timeReal'])[:-9]
-        timeReal = parse_date(timeRealReadable)
+        timeReal = parseDate(timeRealReadable)
 
         if (current_timestamp <= timeReal):
             countdown = (timeReal - current_timestamp) / 60
