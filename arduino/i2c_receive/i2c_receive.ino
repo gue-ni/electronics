@@ -4,6 +4,7 @@
 #define adresse 0x05
 uint8_t number = 0;
 uint8_t old_number = 0;
+uint8_t last_line = 0;
 uint8_t line = 0;
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
@@ -17,19 +18,21 @@ void setup_display(){
 
 void clear_display(){
   setup_display();
-  print_time(old_number, line == 0 ? 1 : 0);
+  print_time(old_number, last_line);
 }
 
 void print_time(uint8_t number, uint8_t line){
     if (number < 10){
     lcd.setCursor(15,line);
-  } else {
+  } else if(number < 100) {
     lcd.setCursor(14,line);
+  } else {
+    lcd.setCursor(13,line);
   }
   lcd.print(number);
   
 }
-
+/*
 void print_wait_time(uint8_t wait_time){
   print_time(wait_time, line);
   
@@ -39,6 +42,7 @@ void print_wait_time(uint8_t wait_time){
     line = 0;
   }
 }
+**/
 
 void setup() {
   lcd.begin(16,2);
@@ -59,15 +63,19 @@ void receiveData(int byteCount) {
   while (Wire.available()) {
     old_number = number;
     number = Wire.read();
+    last_line = line;
+    line = number >> 7;
     Serial.print("Data received: ");
-    Serial.println(number);
+    Serial.print(number);
+    Serial.print(", writing to line: ");
+    Serial.println(line);
   }
 }
 
 void sendData() {
   Wire.write(number);
   clear_display();
-  print_wait_time(number);
+  print_time(number, line);
   
   
   

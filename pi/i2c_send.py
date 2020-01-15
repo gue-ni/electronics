@@ -4,6 +4,8 @@ import json
 import datetime
 bus = smbus2.SMBus(1)
 
+# first bit tells arduino which line to write into
+
 address = 0x05
 
 files = ["data_sfp.json", "data_pha.json"]
@@ -32,18 +34,20 @@ for file in files:
 
     countdown = -1
 
-    for departure in parseDeparture(data):
+    for count, departure in enumerate(parseDeparture(data)):
         timeRealReadable = str(departure['departureTime']['timeReal'])[:-9]
         timeReal = parseDate(timeRealReadable)
 
         if (current_timestamp <= timeReal):
             countdown = (timeReal - current_timestamp) / 60
             print("{} in {} minutes".format(file, countdown))
-        
-            writeNumber(countdown)
-            print("Raspberry sends: ", countdown)
-            time.sleep(1)
 
+            if (countdown > 127): # can not be correctly encoded
+                break
+        
+            writeNumber(countdown | (count << 7))
+            print("Raspberry sends: {} to line {}".format(countdown, count))
+            time.sleep(1)
             received = readNumber()
             print("Arduino sends: ", received)
 
