@@ -24,6 +24,18 @@ def readNumber():
     number = bus.read_byte(address)
     return number
 
+def i2c_send(number, line):
+    if (number > 127): # can not be correctly encoded
+        return -1
+
+    writeNumber(number | (line << 7))
+    print("Raspberry sends: {} to line {}".format(countdown, count))
+    time.sleep(1)
+    received = readNumber()
+    print("Arduino sends: ", received)
+
+
+
 current_timestamp = parseDate(datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')) 
 
 for file in files:
@@ -42,14 +54,7 @@ for file in files:
             countdown = (timeReal - current_timestamp) / 60
             print("{} in {} minutes".format(file, countdown))
 
-            if (countdown > 127): # can not be correctly encoded
-                break
-        
-            writeNumber(countdown | (count << 7))
-            print("Raspberry sends: {} to line {}".format(countdown, count))
-            time.sleep(1)
-            received = readNumber()
-            print("Arduino sends: ", received)
+            i2c_send(countdown, count)
             time.sleep(2)
             break
             

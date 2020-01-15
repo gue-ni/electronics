@@ -3,7 +3,7 @@
 
 #define adresse 0x05
 uint8_t number = 0;
-uint8_t old_number = 0;
+uint8_t last_number = 0;
 uint8_t last_line = 0;
 uint8_t line = 0;
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
@@ -18,7 +18,7 @@ void setup_display(){
 
 void clear_display(){
   setup_display();
-  print_time(old_number, last_line);
+  print_time(last_number, last_line);
 }
 
 void print_time(uint8_t number, uint8_t line){
@@ -61,10 +61,11 @@ void loop() {
 
 void receiveData(int byteCount) {
   while (Wire.available()) {
-    old_number = number;
+    last_number = number;
     number = Wire.read();
     last_line = line;
-    line = number >> 7;
+    line = number >> 7; // first bit of byte is line number
+    number &= 0x7f;
     Serial.print("Data received: ");
     Serial.print(number);
     Serial.print(", writing to line: ");
@@ -73,9 +74,9 @@ void receiveData(int byteCount) {
 }
 
 void sendData() {
-  Wire.write(number);
   clear_display();
   print_time(number, line);
+  Wire.write(number);
   
   
   
