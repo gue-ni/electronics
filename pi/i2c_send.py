@@ -5,6 +5,9 @@ import datetime
 bus = smbus2.SMBus(1)
 
 address = 0x05
+
+files = ["data_pha.json", "data_sfp.json"]
+
 def parse_departure(json_response):
 	return json_response['data']['monitors'][0]['lines'][0]['departures']['departure']	
 
@@ -30,6 +33,8 @@ with open("data_pha.json") as f:
 current_timestamp = parse_date(datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')) 
 
 countdown = -1
+
+	
 
 for departure in parse_departure(data):
     timeRealReadable = str(departure['departureTime']['timeReal'])[:-9]
