@@ -13,4 +13,4 @@ https://www.bigmessowires.com/2018/05/26/raspberry-pi-gpio-programming-in-c/
 
 https://codingworld.io/project/den-arduino-mit-dem-raspberry-pi-verbinden-i2c
 
-
+https://oscarliang.com/raspberry-pi-arduino-connected-i2c/
