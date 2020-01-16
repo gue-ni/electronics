@@ -13,23 +13,15 @@ time_format = "%Y-%m-%dT%H:%M:%S"
 
 files = ["data_172.json", "data_165.json"]
 
-def writeNumber(value):
-    bus.write_byte(address, value)
-    return -1
-
-def readNumber():
-    number = bus.read_byte(address)
-    return number
-
 def i2c_send(number, line):
     if (number > 127): # can not be correctly encoded
         print("number to large")
         return -1
 
-    writeNumber(number | (line << 7))
+    bus.write_byte(address, number | (line << 7))
     print("Raspberry sends: {} to line {}".format(countdown, line))
     time.sleep(1)
-    received = readNumber()
+    received = bus.read_byte(address) 
     print("Arduino sends: {}".format(received))
 
 
