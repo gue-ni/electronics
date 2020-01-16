@@ -10,7 +10,7 @@ address = 0x05
 
 time_format = "%Y-%m-%dT%H:%M:%S"
 
-files = ["/home/pi/arduino/pi/data_sfp.json", "/home/pi/arduino/pi/data_pha.json"]
+files = ["/home/pi/arduino/pi/data_172.json", "/home/pi/arduino/pi/data_165.json"]
 
 def writeNumber(value):
     bus.write_byte(address, value)
