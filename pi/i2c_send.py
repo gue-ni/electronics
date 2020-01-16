@@ -54,7 +54,7 @@ for line, file in enumerate(files):
 
             print("[{}] Towards {} in {} minutes ({}) planned : {}".format(timeNow, direction, countdown, timeReal, timePlanned))
 
-   #         i2c_send(countdown, line)
+            i2c_send(countdown, line)
             time.sleep(2)
             break
 
