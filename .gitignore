@@ -1,6 +1,8 @@
 # Files
 *.json
 *.pdf
+*.o
+
 
 # Directories
 libraries/
