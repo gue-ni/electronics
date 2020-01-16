@@ -16,13 +16,11 @@ files = ["data_172.json", "data_165.json"]
 def i2c_send(number, line):
     if (number > 127): # can not be correctly encoded
         print("number to large")
-        return -1
+        return
 
     bus.write_byte(address, number | (line << 7))
-    #print("Raspberry sends: {} to line {}".format(countdown, line))
     time.sleep(1)
     received = bus.read_byte(address) 
-    #print("Arduino sends: {}".format(received))
 
     if (countdown != received):
         print("error sending/receiving")
