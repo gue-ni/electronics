@@ -53,7 +53,6 @@ for line, file in enumerate(files):
     for departure in departures:
         timeReadable = str(departure['departureTime']['timeReal'])[:-9]
         timeReal = datetime.strptime(timeReadable, time_format) 
-		print(timeReadable)
         if (timeNow <= timeReal):
             
             countdown = int(round((timeReal - timeNow).seconds / 60.0))
