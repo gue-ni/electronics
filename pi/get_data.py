@@ -5,6 +5,8 @@ import time
 base_url = "https://www.wienerlinien.at/ogd_realtime"
 monitor_url = "{}/monitor".format(base_url)
 
+data_dir = "/home/pi/arduino/pi"
+
 def parse_status_code(code):
 	if code == 200:
 		return "OK"
@@ -35,7 +37,7 @@ for direction in rbl:
 	print(parse_status_code(response.status_code))
 	response_json = response.json()
 
-	with open("/home/pi/arduino/pi/data_{}.json".format(direction), 'w') as f:
+	with open("{}/data_{}.json".format(data_dir, direction), 'w') as f:
 		json.dump(response_json, f)
 		f.close()
 

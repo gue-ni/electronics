@@ -1,16 +1,17 @@
-import smbus2
+#import smbus2
 import time
 import json
 from datetime import datetime
-bus = smbus2.SMBus(1)
+#bus = smbus2.SMBus(1)
 
 # first bit tells arduino which line to write into
 
 address = 0x05
+data_dir = "."
 
 time_format = "%Y-%m-%dT%H:%M:%S"
 
-files = ["/home/pi/arduino/pi/data_172.json", "/home/pi/arduino/pi/data_165.json"]
+files = ["data_172.json", "data_165.json"]
 
 def writeNumber(value):
     bus.write_byte(address, value)
@@ -36,7 +37,7 @@ for line, file in enumerate(files):
 
     timeNow = datetime.now()
    
-    with open(file) as f:
+    with open("{}/{}".format(data_dir, file)) as f:
         data = json.load(f)
         f.close()
 
@@ -59,8 +60,8 @@ for line, file in enumerate(files):
 
             print("Towards {} in {} minutes".format(direction, countdown))
 
-            i2c_send(countdown, line)
-            time.sleep(2)
+            #i2c_send(countdown, line)
+            #time.sleep(2)
             break
 
 
