@@ -2,3 +2,4 @@ libraries/
 data/
 datasheets/
 docs/
+*.json
