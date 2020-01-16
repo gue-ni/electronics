@@ -25,37 +25,38 @@ def readNumber():
 	return number
 
 def i2c_send(number, line):
-    if (number > 127): # can not be correctly encoded
-        return -1
+	if (number > 127): # can not be correctly encoded
+		print("number to large")
+		return -1
 
-    writeNumber(number | (line << 7))
-    print("Raspberry sends: {} to line {}".format(countdown, count))
-    time.sleep(1)
-    received = readNumber()
-    print("Arduino sends: {}".format(received))
+	writeNumber(number | (line << 7))
+	print("Raspberry sends: {} to line {}".format(countdown, count))
+	time.sleep(1)
+	received = readNumber()
+	print("Arduino sends: {}".format(received))
 
 current_timestamp = parseDate(datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')) 
+print("test")
+for count, file in enumerate(files):
+	print(file)
+	with open(file) as f:
+		data = json.load(f)
+		f.close()
 
-for file in files:
+	countdown = -1
 
-    with open(file) as f:
-        data = json.load(f)
-        f.close()
+	for departure in parseDeparture(data):
+		timeRealReadable = str(departure['departureTime']['timeReal'])[:-9]
+		timeReal = parseDate(timeRealReadable)
+		print(timeRealReadable)
+		if (current_timestamp <= timeReal):
+			countdown = (timeReal - current_timestamp) / 60
+			print("{} in {} minutes".format(file, countdown))
 
-    countdown = -1
+			i2c_send(countdown, count)
+			time.sleep(2)
+			break
 
-    for count, departure in enumerate(parseDeparture(data)):
-        timeRealReadable = str(departure['departureTime']['timeReal'])[:-9]
-        timeReal = parseDate(timeRealReadable)
-
-        if (current_timestamp <= timeReal):
-            countdown = (timeReal - current_timestamp) / 60
-            print("{} in {} minutes".format(file, countdown))
-
-            i2c_send(countdown, count)
-            time.sleep(2)
-            break
-            
 
 
 
