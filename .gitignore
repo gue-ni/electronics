@@ -1,5 +1,9 @@
+# Files
+*.json
+*.pdf
+
+# Directories
 libraries/
 data/
 datasheets/
 docs/
-*.json
