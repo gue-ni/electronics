@@ -1,8 +1,8 @@
-#import smbus2
+import smbus2
 import time
 import json
 from datetime import datetime
-#bus = smbus2.SMBus(1)
+bus = smbus2.SMBus(1)
 
 # first bit tells arduino which line to write into
 
