@@ -8,6 +8,8 @@ from datetime import datetime
 
 address = 0x05
 
+time_format = "%Y-%m-%dT%H:%M:%S"
+
 files = ["data_sfp.json", "data_pha.json"]
 
 def parseDeparture(json_response):
@@ -33,6 +35,7 @@ def i2c_send(number, line):
     print("Arduino sends: {}".format(received))
 
 timeNow = datetime.now()
+print("Time now {}".format(timeNow.strftime(time_format)))
 
 for line, file in enumerate(files):
 
@@ -44,7 +47,7 @@ for line, file in enumerate(files):
 
     for departure in parseDeparture(data):
         timeReadable = str(departure['departureTime']['timeReal'])[:-9]
-        timeReal = datetime.strptime(timeReadable, "%Y-%m-%dT%H:%M:%S") 
+        timeReal = datetime.strptime(timeReadable, time_format) 
 
         if (timeNow <= timeReal):
             print(timeReadable)
