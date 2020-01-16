@@ -7,7 +7,7 @@ bus = smbus2.SMBus(1)
 # first bit tells arduino which line to write into
 
 address = 0x05
-data_dir = "/home/pi/arduino/pi"
+data_dir = "/home/pi/arduino/data"
 
 time_format = "%Y-%m-%dT%H:%M:%S"
 
@@ -53,6 +53,7 @@ for line, file in enumerate(files):
     for departure in departures:
         timeReadable = str(departure['departureTime']['timeReal'])[:-9]
         timeReal = datetime.strptime(timeReadable, time_format) 
+   
         if (timeNow <= timeReal):
             
             countdown = int(round((timeReal - timeNow).seconds / 60.0))
