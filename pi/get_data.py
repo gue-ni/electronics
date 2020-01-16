@@ -1,6 +1,7 @@
 import requests
 import json
 import time
+from datetime import datetime
 
 base_url = "https://www.wienerlinien.at/ogd_realtime"
 monitor_url = "{}/monitor".format(base_url)
@@ -31,7 +32,7 @@ rbl = [rbl_pha, rbl_sfp]
 for direction in rbl:
 	response = requests.get(monitor_url, params=[("rbl", direction)])
 
-	print(parse_status_code(response.status_code))
+	print("[{}] {}".format(datetime.now(), parse_status_code(response.status_code)))
 	response_json = response.json()
 
 	with open("{}/data_{}.json".format(data_dir, direction), 'w') as f:
