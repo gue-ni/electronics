@@ -32,7 +32,7 @@ response = requests.get(monitor_url, params=[("rbl", rbl_pha)])
 print(parse_status_code(response.status_code))
 response_json = response.json()
 
-with open('data_pha.json', 'w') as f:
+with open('/home/pi/arduino/pi/data_pha.json', 'w') as f:
 	json.dump(response_json, f)
 	f.close()
 
@@ -43,7 +43,7 @@ response = requests.get(monitor_url, params=[("rbl", rbl_sfp)])
 print(parse_status_code(response.status_code))
 response_json = response.json()
 
-with open('data_sfp.json', 'w') as f:
+with open('/home/pi/arduino/pi/data_sfp.json', 'w') as f:
 	json.dump(response_json, f)
 	f.close()
 
