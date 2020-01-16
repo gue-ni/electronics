@@ -12,9 +12,6 @@ time_format = "%Y-%m-%dT%H:%M:%S"
 
 files = ["data_sfp.json", "data_pha.json"]
 
-def parseDeparture(json_response):
-    return json_response['data']['monitors'][0]['lines'][0]['departures']['departure']	
-
 def writeNumber(value):
     bus.write_byte(address, value)
     return -1
@@ -34,27 +31,33 @@ def i2c_send(number, line):
     received = readNumber()
     print("Arduino sends: {}".format(received))
 
-timeNow = datetime.now()
-print("Time now {}".format(timeNow.strftime(time_format)))
 
 for line, file in enumerate(files):
 
+    timeNow = datetime.now()
+   
     with open(file) as f:
         data = json.load(f)
         f.close()
 
+    stop = data['data']['monitors'][0]['locationStop']['properties']['title']
+    direction = data['data']['monitors'][0]['lines'][0]['towards']
+    departures = data['data']['monitors'][0]['lines'][0]['departures']['departure']
+
+    #print(direction)
+    #print(departures)
+    
     countdown = -1
 
-    for departure in parseDeparture(data):
+    for departure in departures:
         timeReadable = str(departure['departureTime']['timeReal'])[:-9]
         timeReal = datetime.strptime(timeReadable, time_format) 
 
         if (timeNow <= timeReal):
-            print(timeReadable)
             
-            countdown = (timeReal - timeNow).seconds / 60
+            countdown = int(round((timeReal - timeNow).seconds / 60.0))
 
-            print("{} in {} minutes".format(file, countdown))
+            print("Towards {} in {} minutes".format(direction, countdown))
 
             i2c_send(countdown, line)
             time.sleep(2)
