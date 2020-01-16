@@ -51,7 +51,7 @@ for line, file in enumerate(files):
             
             countdown = int(round((timeReal - timeNow).seconds / 60.0))
 
-            print("Towards {} in {} minutes".format(direction, countdown))
+            print("[{}] Towards {} in {} minutes ({})".format(timeNow, direction, countdown, timeReal))
 
             i2c_send(countdown, line)
             time.sleep(2)
