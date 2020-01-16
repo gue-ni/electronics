@@ -23,9 +23,6 @@ def parse_status_code(code):
 	
 	return "Unknown status code {}".format(code)
 
-def parse_departure(json_response):
-	return json_response['data']['monitors'][0]['lines'][0]['departures']['departure']	
-
 rbl_pha = 165 # richtung prater hauptallee
 rbl_sfp = 172 # richtung stefan fadinger platz
 
