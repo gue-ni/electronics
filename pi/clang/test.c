@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <linux/i2c.h>
+//#include <linux/i2c.h>
 #include <i2c/smbus.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
