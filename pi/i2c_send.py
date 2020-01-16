@@ -8,7 +8,6 @@ bus = smbus2.SMBus(1)
 
 address = 0x05
 data_dir = "/home/pi/arduino/data"
-
 time_format = "%Y-%m-%dT%H:%M:%S"
 
 files = ["data_172.json", "data_165.json"]
@@ -45,15 +44,17 @@ for line, file in enumerate(files):
 
     for departure in departures:
         timeReadable = str(departure['departureTime']['timeReal'])[:-9]
+        
         timeReal = datetime.strptime(timeReadable, time_format) 
+        timePlanned = datetime.strptime(str(departure['departureTime']['timePlanned'])[:-9], time_format)
    
         if (timeNow <= timeReal):
             
             countdown = int(round((timeReal - timeNow).seconds / 60.0))
 
-            print("[{}] Towards {} in {} minutes ({})".format(timeNow, direction, countdown, timeReal))
+            print("[{}] Towards {} in {} minutes ({}) planned : {}".format(timeNow, direction, countdown, timeReal, timePlanned))
 
-            i2c_send(countdown, line)
+   #         i2c_send(countdown, line)
             time.sleep(2)
             break
 
