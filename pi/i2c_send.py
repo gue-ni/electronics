@@ -19,10 +19,13 @@ def i2c_send(number, line):
         return -1
 
     bus.write_byte(address, number | (line << 7))
-    print("Raspberry sends: {} to line {}".format(countdown, line))
+    #print("Raspberry sends: {} to line {}".format(countdown, line))
     time.sleep(1)
     received = bus.read_byte(address) 
-    print("Arduino sends: {}".format(received))
+    #print("Arduino sends: {}".format(received))
+
+    if (countdown != received):
+        print("error sending/receiving")
 
 
 for line, file in enumerate(files):
