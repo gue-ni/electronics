@@ -3,15 +3,15 @@
  * @details
  * 
  */
-#include <unistd.h>
+//#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <i2c/smbus.h>
 #include <sys/ioctl.h>
-#include <sys/types.h>
+//#include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
+//#include <fcntl.h>
 #include <linux/i2c-dev.h>
 
 #define I2C "/dev/i2c-1"
