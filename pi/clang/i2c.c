@@ -41,10 +41,11 @@ int main(int argc, char **argv)
     }
 
     if(read(fd, buffer, BUFSIZE) != BUFSIZE){
-        printf("Read: %s\n", buffer);
+        error_exit("read failed");
     }
 
 
+    printf("Read: %s\n", buffer);
 
 
     return EXIT_SUCCESS;
