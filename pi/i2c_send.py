@@ -7,7 +7,7 @@ bus = smbus2.SMBus(1)
 # first bit tells arduino which line to write into
 
 address = 0x05
-data_dir = "/home/pi/arduino/data"
+data_dir = "/home/pi/electronics/data"
 time_format = "%Y-%m-%dT%H:%M:%S"
 
 files = ["data_172.json", "data_165.json"]
