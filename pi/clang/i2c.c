@@ -13,6 +13,11 @@
 #define ADRESS (0x05)
 #define BUFSIZE (2)
 
+typedef struct data {
+    uint8_t x;
+    uint8_t y;
+} data_t;
+
 void error_exit(char *msg)
 {
     fprintf(stderr, "%s\n", msg);

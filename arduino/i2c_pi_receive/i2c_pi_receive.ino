@@ -32,6 +32,8 @@ void receiveData(int bytes)
 }
 
 void sendData(){
+  buf[0] = 0x47;
+  buf[1] = 0x48;
   Wire.write(buf, BUFSIZE);
   Serial.println("Sending data"); 
 }
