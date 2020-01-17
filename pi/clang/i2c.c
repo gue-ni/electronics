@@ -11,7 +11,7 @@
 
 #define I2C "/dev/i2c-1"
 #define ADRESS (0x05)
-#define BUFSIZE (4)
+#define BUFSIZE (2)
 
 void error_exit(char *msg)
 {
@@ -21,7 +21,6 @@ void error_exit(char *msg)
 
 int main(int argc, char **argv)
 {
-
     int fd;
     uint8_t buffer[BUFSIZE];
     buffer[0] = 0x41;

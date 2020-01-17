@@ -1,11 +1,16 @@
 #include <Wire.h>
 #include <LiquidCrystal.h>
 
+#define LINE 16
 #define adresse 0x05
+
 uint8_t number = 0;
 uint8_t last_number = 0;
 uint8_t last_line = 0;
 uint8_t line = 0;
+
+char line0[LINE];
+char line1[LINE];
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
@@ -32,17 +37,7 @@ void print_time(uint8_t number, uint8_t line){
   lcd.print(number);
   
 }
-/*
-void print_wait_time(uint8_t wait_time){
-  print_time(wait_time, line);
-  
-  if (line == 0){
-    line = 1;
-  } else {
-    line = 0;
-  }
-}
-**/
+
 
 void setup() {
   lcd.begin(16,2);
