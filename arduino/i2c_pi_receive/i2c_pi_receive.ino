@@ -21,13 +21,15 @@ void loop() {
 void receiveData(int bytes)
 {
   Serial.print("Received: ");
-  Serial.println(bytes);
+  Serial.print(bytes);
+  Serial.println(" bytes");
+  Serial.println("Read: ");
 
   for (int i = 0; i < bytes && bytes <= BUFSIZE; i++){
     buf[i] = Wire.read();
+    Serial.print(buf[i], HEX);
   }
-  Serial.print("Read: ");
-  Serial.println(buf[0]);
+  Serial.println();
   
 }
 
