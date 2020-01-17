@@ -5,7 +5,7 @@ CC 	   = gcc
 CFLAGS = -Wall -g
 LFLAGS = -li2c
 
-PROGS  = test i2c
+PROGS  = i2c_io
 
 .PHONY: all clean
 
