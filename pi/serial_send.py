@@ -1,11 +1,4 @@
-
-
-s.write(b'1')
-response  = s.read()
-print(response)
-
 import serial
-import smbus2
 import time
 import json
 from datetime import datetime
@@ -30,7 +23,6 @@ def serial_send(number, line):
 
     if (countdown != received):
         print("error sending/receiving")
-
 
 for line, file in enumerate(files):
 
