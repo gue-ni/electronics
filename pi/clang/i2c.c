@@ -18,10 +18,9 @@
 #define ADRESS (0x05)
 #define BUFSIZE (2)
 
-typedef struct data {
-    uint8_t x;
-    uint8_t y;
-} data_t;
+struct data {
+    uint8_t buffer[BUFSIZE];
+}
 
 void error_exit(char *msg)
 {
@@ -32,9 +31,13 @@ void error_exit(char *msg)
 int main(int argc, char **argv)
 {
     int fd;
-    uint8_t buffer[BUFSIZE];
-    buffer[0] = 0x41;
-    buffer[1] = 0x42;
+
+    struct data *buf;
+
+    buf->buffer[0] = 0x41;
+    buf->buffer[1] = 0x42;
+
+
 
     if((fd = open(I2C, O_RDWR)) < 0){
         error_exit("failed to open");
@@ -44,15 +47,15 @@ int main(int argc, char **argv)
         error_exit("ioctl failed");
     }
 
-    if (write(fd, buffer, BUFSIZE) != BUFSIZE){
+    if (write(fd, data, BUFSIZE) != BUFSIZE){
         error_exit("write failed");
     }
 
-    if(read(fd, buffer, BUFSIZE) != BUFSIZE){
+    if(read(fd, data, BUFSIZE) != BUFSIZE){
         error_exit("read failed");
     }
 
-    printf("Read: %s\n", buffer);
+    printf("Read: %s\n", data);
 
     return EXIT_SUCCESS;
 }
