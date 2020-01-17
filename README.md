@@ -2,6 +2,12 @@
 
 
 ## Abfahrtsmonitor
+### Crontab
+```
+*/5 * * * * python /home/pi/arduino/pi/get_data.py
+* * * * *  python /home/pi/arduino/pi/i2c_send.py
+```
+
 ### Circuits
 #### I2C
 Pi GPiO 2 (SDA) - Arduino A4 (SDA)   
