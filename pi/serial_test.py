@@ -19,11 +19,10 @@ s.write(to_send)
 
 try:
     while True:
-        response = s.read(1)
+        response = s.read(2)
 #        print(type(response))
-
 #        response = int.from_bytes(response, byteorder='little', signed=False)
-        response = struct.unpack('B', response)[0]        
+        response = struct.unpack('BB', response)   
         print(response)
 except KeyboardInterrupt:
     s.close()
