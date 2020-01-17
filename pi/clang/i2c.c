@@ -54,7 +54,9 @@ int main(int argc, char **argv)
         error_exit("read failed");
     }
 
-    printf("Read: %s\n", buf->buffer);
+    printf("Read: %s from slave %d\n", buf->buffer, ADRESS);
+
+    free(buf);
 
     return EXIT_SUCCESS;
 }
