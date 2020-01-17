@@ -19,7 +19,7 @@
 
 struct data {
     uint8_t buffer[BUFSIZE];
-}
+};
 
 void error_exit(char *msg)
 {
@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 {
     int fd;
 
-    struct data *buf;
+    struct data *buf = malloc(sizeof(struct data));
 
     buf->buffer[0] = 0x41;
     buf->buffer[1] = 0x42;
@@ -46,15 +46,15 @@ int main(int argc, char **argv)
         error_exit("ioctl failed");
     }
 
-    if (write(fd, data, BUFSIZE) != BUFSIZE){
+    if (write(fd, buf, BUFSIZE) != BUFSIZE){
         error_exit("write failed");
     }
 
-    if(read(fd, data, BUFSIZE) != BUFSIZE){
+    if(read(fd, buf, BUFSIZE) != BUFSIZE){
         error_exit("read failed");
     }
 
-    printf("Read: %s\n", data);
+    printf("Read: %s\n", buf->buffer);
 
     return EXIT_SUCCESS;
 }
