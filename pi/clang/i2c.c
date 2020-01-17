@@ -35,9 +35,7 @@ int main(int argc, char **argv)
 
     buf->buffer[0] = 0x41;
     buf->buffer[1] = 0x42;
-
-
-
+    
     if((fd = open(I2C, O_RDWR)) < 0){
         error_exit("failed to open");
     }
