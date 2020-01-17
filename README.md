@@ -4,8 +4,8 @@
 ## Abfahrtsmonitor
 ### Crontab
 ```
-*/5 * * * * python /home/pi/arduino/pi/get_data.py
-* * * * *  python /home/pi/arduino/pi/i2c_send.py
+*/5 * * * * python /home/pi/arduino/pi/get_data.py # every 5 minutes
+* * * * *  python /home/pi/arduino/pi/i2c_send.py  # every minute
 ```
 
 ### Circuits
