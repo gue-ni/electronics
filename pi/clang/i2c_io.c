@@ -2,16 +2,19 @@
  * @author Jakob G. Maier
  * @details
  * 
+ * Documentation: 
+ * https://www.kernel.org/doc/Documentation/i2c/dev-interface 
  */
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <i2c/smbus.h>
+#include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
-#include <fcntl.h>
+
 #include <linux/i2c-dev.h>
+#include <i2c/smbus.h>
 
 #define I2C "/dev/i2c-1"
 #define ADRESS (0x05)
