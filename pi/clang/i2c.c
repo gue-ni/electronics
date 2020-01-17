@@ -43,9 +43,7 @@ int main(int argc, char **argv)
         error_exit("read failed");
     }
 
-
     printf("Read: %s\n", buffer);
-
 
     return EXIT_SUCCESS;
 }
