@@ -13,7 +13,7 @@
 #define ADRESS (0x05)
 #define BUFSIZE (4)
 
-void error_exit(*msg)
+void error_exit(char *msg)
 {
     fprintf(stderr, "%s\n", msg);
     exit(EXIT_FAILURE);
@@ -23,7 +23,6 @@ int main(int argc, char **argv)
 {
 
     int fd;
-    unsigned long funcs;
     uint8_t buffer[BUFSIZE];
     buffer[0] = 0x41;
     buffer[1] = 0x42;
