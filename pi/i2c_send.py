@@ -1,12 +1,16 @@
 import smbus2
 import time
 import json
+import struct
 from datetime import datetime
 bus = smbus2.SMBus(1)
 
 # first bit tells arduino which line to write into
 
 address = 0x05
+i2c_cmd_write = 0x01
+i2c_cmd_read = 0x02
+
 data_dir = "/home/pi/electronics/data"
 time_format = "%Y-%m-%dT%H:%M:%S"
 
@@ -17,14 +21,17 @@ def i2c_send(number, line):
         print("number to large")
         return
 
-    bus.write_byte(address, number | (line << 7))
+    
+    data = struct.pack('BBBB', 0xf, 0xff, 0x41, 0x54)
+    #bus.write_byte(address, number | (line << 7))
+    bus.write_i2c_block_data(address, i2c_cmd_write, data)
     time.sleep(1)
     received = bus.read_byte(address) 
 
     if (countdown != received):
         print("error sending/receiving")
 
-
+'''
 for line, file in enumerate(files):
 
     timeNow = datetime.now()
@@ -58,6 +65,11 @@ for line, file in enumerate(files):
             time.sleep(2)
             break
 
+'''
 
+data = struct.pack('BBBB', 0xf, 0xff, 0x41, 0x54)
+bus.write_i2c_block_data(address, i2c_cmd_write, data)
+read_data = bus.read_i2c_block_data(adress, i2c_cmd_read, 4)
 
-
+response = struct.unpack("BBBB", read_data)
+print(response)

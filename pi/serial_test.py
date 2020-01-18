@@ -3,25 +3,27 @@ import serial
 import time
 import struct
  
-s = serial.Serial('/dev/ttyACM0', 9600) # Namen ggf. anpassen
+s = serial.Serial('/dev/ttyACM1', 9600) 
+
 try:
     s.open()
 except IOError:
     s.close()
     s.open()
 
-
-time.sleep(3) # der Arduino resettet nach einer Seriellen Verbindung, daher muss kurz gewartet werden
+time.sleep(3) 
  
-to_send = struct.pack('B', 0x41)
+data = struct.pack('BBBB', 0xf, 0xff, 0x41, 0x54)
 
-s.write(to_send)
+print("Writing...")
+s.write(data)
 
+print("Reading...")
 try:
-    while True:
-        response = s.read(2)
-#        response = int.from_bytes(response, byteorder='little', signed=False)
-        response = struct.unpack('BB', response)   
-        print(response)
+    response = s.read(4)
+    response = struct.unpack('BBBB', response)   
+    print(response)
+
+
 except KeyboardInterrupt:
     s.close()
