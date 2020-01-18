@@ -53,13 +53,12 @@ void loop() {
     setup_display();
     print_time(buf[LINE0_NOW], 0);
     print_time(buf[LINE1_NOW], 1);
-    delay(3000);
+    delay(5000);
     
     setup_display();
     print_time(buf[LINE0_NEXT], 0);
     print_time(buf[LINE1_NEXT], 1);
-    delay(3000);    
-    delay(100);
+    delay(5000);    
 }
 
 void receiveData(int bytes)
@@ -70,9 +69,7 @@ void receiveData(int bytes)
   for (int i = 0; i< bytesRead; i++){
     buf[i] = Wire.read();
     Serial.println(buf[i]);
-  }
-  Serial.println();
-  
+  }  
 }
 
 void sendData(){
