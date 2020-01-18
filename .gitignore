@@ -9,3 +9,9 @@ libraries/
 data/
 datasheets/
 docs/
+
+# Executables
+pi/clang/i2c_io
+pi/clang/test
+
+
