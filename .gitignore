@@ -8,7 +8,8 @@
 libraries/
 data/
 datasheets/
-docs/
+docs/a
+.vscode/
 
 # Executables
 pi/clang/i2c_io
