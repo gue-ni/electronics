@@ -16,6 +16,7 @@ time_format = "%Y-%m-%dT%H:%M:%S"
 
 files = ["data_172.json", "data_165.json"]
 
+'''
 def i2c_send(number, line):
     if (number > 127): # can not be correctly encoded
         print("number to large")
@@ -32,6 +33,16 @@ def i2c_send(number, line):
         print("error sending/receiving")
 
 '''
+
+def parse_time(now, dep):
+    timeReal = str(dep['departureTime']['timeReal'])[:-9]
+    timeReal = datetime.strptime(timeReal, time_format) 
+    c =  int(round((timeReal - timeNow).seconds / 60.0))
+    print(c)
+    return c
+
+times = []
+
 for line, file in enumerate(files):
 
     timeNow = datetime.now()
@@ -44,31 +55,24 @@ for line, file in enumerate(files):
     direction = data['data']['monitors'][0]['lines'][0]['towards']
     departures = data['data']['monitors'][0]['lines'][0]['departures']['departure']
 
-    #print(direction)
-    #print(departures)
-    
-    countdown = -1
-
-    for departure in departures:
+    for i, departure in enumerate(departures):
         timeReadable = str(departure['departureTime']['timeReal'])[:-9]
-        
         timeReal = datetime.strptime(timeReadable, time_format) 
-        timePlanned = datetime.strptime(str(departure['departureTime']['timePlanned'])[:-9], time_format)
-   
+
         if (timeNow <= timeReal):
-            
-            countdown = int(round((timeReal - timeNow).seconds / 60.0))
+            #print(i)
+            #print(departures[i]['departureTime'])
+            #print(departures[i+1]['departureTime'])
+            n1 = parse_time(timeNow, departures[i])
+            n2 = parse_time(timeNow, departures[i+1])
+            times.append(n1)
+            times.append(n2)
 
-            print("[{}] Towards {} in {} minutes ({}) planned : {}".format(timeNow, direction, countdown, timeReal, timePlanned))
-
-            i2c_send(countdown, line)
-            time.sleep(2)
+            print("[{}] Towards {} in {} and {} minutes".format(timeNow, direction, n1, n2))
             break
 
-'''
-
-bus.write_i2c_block_data(address, i2c_cmd_write, [0x41, 0x42, 0x43, 0x44])
+print(times)
+bus.write_i2c_block_data(address, i2c_cmd_write, times)
 time.sleep(1)
 response  = bus.read_i2c_block_data(address, i2c_cmd_read, 5)
-
 print(response)

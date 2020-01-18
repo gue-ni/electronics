@@ -7,7 +7,7 @@ base_url = "https://www.wienerlinien.at/ogd_realtime"
 monitor_url = "{}/monitor".format(base_url)
 
 #data_dir = "/home/pi/electronics/data"
-data_dir = "../data"
+data_dir = "/home/pi/electronics/data"
 
 def parse_status_code(code):
 	if code == 200:
