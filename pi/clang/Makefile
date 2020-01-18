@@ -2,7 +2,7 @@
 # @author Jakob G. Maier <e11809618@student.tuwien.ac.at>
 
 CC 	   = gcc
-CFLAGS = -Wall -g
+CFLAGS = -std=c99 -pedantic -Wall -g
 LFLAGS = -li2c
 
 PROGS  = i2c_io

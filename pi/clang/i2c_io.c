@@ -53,9 +53,10 @@ int main(int argc, char **argv)
 
     if(read(fd, data, BUFSIZE) != BUFSIZE){
         error_exit("read failed");
-    }
+    } else {
+    	printf("Read: %s from slave %d\n", data->buf, ADRESS);
+	}
 
-    printf("Read: %s from slave %d\n", data->buf, ADRESS);
 
     free(data);
 

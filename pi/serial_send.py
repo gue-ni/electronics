@@ -54,7 +54,7 @@ for line, file in enumerate(files):
             
             countdown = int(round((timeReal - timeNow).seconds / 60.0))
 
-            print("[{}] Towards {} in {} minutes ({}) planned : {}".format(timeNow, direction, countdown, timeReal, timePlanned))
+            #print("[{}] Towards {} in {} minutes ({}) planned : {}".format(timeNow, direction, countdown, timeReal, timePlanned))
 
             serial_send(countdown, line)
             time.sleep(2)
