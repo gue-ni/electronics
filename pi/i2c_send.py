@@ -67,9 +67,8 @@ for line, file in enumerate(files):
 
 '''
 
-data = struct.pack('BBBB', 0xf, 0xff, 0x41, 0x54)
-bus.write_i2c_block_data(address, i2c_cmd_write, data)
-read_data = bus.read_i2c_block_data(adress, i2c_cmd_read, 4)
+bus.write_i2c_block_data(address, i2c_cmd_write, [0x41, 0x42, 0x43, 0x44])
+time.sleep(1)
+response  = bus.read_i2c_block_data(address, i2c_cmd_read, 5)
 
-response = struct.unpack("BBBB", read_data)
 print(response)

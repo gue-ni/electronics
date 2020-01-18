@@ -18,11 +18,8 @@
 
 #define I2C "/dev/i2c-1"
 #define ADRESS (0x05)
-#define BUFSIZE (2)
+#define BUFSIZE (4)
 
-struct data_buf {
-    uint8_t buf[BUFSIZE];
-};
 
 void error_exit(char *msg)
 {
@@ -33,11 +30,13 @@ void error_exit(char *msg)
 int main(int argc, char **argv)
 {
     int fd;
+	uint8_t buf[BUFSIZE];
+	uint8_t rbuf[BUFSIZE];
 
-    struct data_buf *data = malloc(sizeof(struct data_buf));
-
-    data->buf[0] = 0x41;
-    data->buf[1] = 0x42;
+    buf[0] = 0x41;
+    buf[1] = 0x42;
+    buf[2] = 0x43;
+    buf[4] = 0x44;
     
     if((fd = open(I2C, O_RDWR)) < 0){
         error_exit("failed to open");
@@ -47,18 +46,17 @@ int main(int argc, char **argv)
         error_exit("ioctl failed");
     }
 
-    if (write(fd, data, BUFSIZE) != BUFSIZE){
+    if (write(fd, buf, 3) != BUFSIZE){
         error_exit("write failed");
     }
 
-    if(read(fd, data, BUFSIZE) != BUFSIZE){
+    if(read(fd, rbuf, 3) != BUFSIZE){
         error_exit("read failed");
     } else {
-    	printf("Read: %s from slave %d\n", data->buf, ADRESS);
+    	printf("Read: %s from slave %d\n", rbuf, ADRESS);
 	}
 
 
-    free(data);
 
     return EXIT_SUCCESS;
 }
