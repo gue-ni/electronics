@@ -7,7 +7,8 @@ s = serial.Serial('/dev/ttyACM0', 9600)
 # first bit tells arduino which line to write into
 
 address = 0x05
-data_dir = "/home/pi/electronics/data"
+#data_dir = "/home/pi/electronics/data"
+data_dir = "../data"
 time_format = "%Y-%m-%dT%H:%M:%S"
 
 files = ["data_172.json", "data_165.json"]
@@ -16,10 +17,12 @@ def serial_send(number, line):
     if (number > 127): # can not be correctly encoded
         print("number to large")
         return
-
-    s.write(number | (line << 7))
+    send = number | (line << 7)
+    print(send)
+    s.write(send)
     time.sleep(1)
     received = s.read()
+    print(received)
 
     if (countdown != received):
         print("error sending/receiving")
