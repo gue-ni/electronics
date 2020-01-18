@@ -16,6 +16,8 @@
 #include <linux/i2c-dev.h>
 #include <i2c/smbus.h>
 
+#define I2C_CMD_READ    0x02
+#define I2C_CMD_WRITE   0x01
 #define I2C "/dev/i2c-1"
 #define ADRESS (0x05)
 #define BUFSIZE (4)
@@ -55,6 +57,10 @@ int main(int argc, char **argv)
     } else {
     	printf("Read: %s from slave %d\n", rbuf, ADRESS);
 	}
+
+    i2c_smbus_read_block_data(fd, I2C_CMD_READ, buf);
+    i2c_smbus_write_block_data(fd, I2C_CMD_WRITE, buf);
+
 
 
 
