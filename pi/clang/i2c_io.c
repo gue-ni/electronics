@@ -58,8 +58,8 @@ int main(int argc, char **argv)
     	printf("Read: %s from slave %d\n", rbuf, ADRESS);
 	}
 
-    i2c_smbus_read_block_data(fd, I2C_CMD_READ, buf);
-    i2c_smbus_write_block_data(fd, I2C_CMD_WRITE, buf);
+//    i2c_smbus_read_block_data(fd, I2C_CMD_READ, buf);
+//    i2c_smbus_write_block_data(fd, I2C_CMD_WRITE, buf);
 
 
 
