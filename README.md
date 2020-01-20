@@ -1,7 +1,6 @@
 # Electronics Projects
 ## Wiener Linien Abfahrtsmonitor
-
-![header image](https://github.com/gue-ni/electronics/blob/master/docs/img/img_2.jpg?raw=true)
+![Title Image](https://github.com/gue-ni/electronics/blob/master/docs/img/img_2.jpg?raw=true)
 
 #### Crontab
 ```
