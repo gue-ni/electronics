@@ -18,9 +18,9 @@
 
 #define I2C_CMD_READ    0x02
 #define I2C_CMD_WRITE   0x01
-#define I2C "/dev/i2c-1"
-#define ADRESS (0x05)
-#define BUFSIZE (4)
+#define I2C             "/dev/i2c-1"
+#define ADRESS          (0x05)
+#define BUFSIZE         (4)
 
 
 void error_exit(char *msg)
