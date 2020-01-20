@@ -5,19 +5,22 @@
 I used a raspberry pi and an arduino attached to an lcd to display when the tram leaves from the station near my apartment. The data comes from the official Wiener Linien API, which offers free 
 real-time data on all of its services.
 
-
 #### Crontab
 ```
 */5 * * * * python /home/pi/arduino/pi/wiener_linien_api.py # every 5 minutes
 * * * * *  python /home/pi/arduino/pi/wiener_linien_i2c.py  # every minute
 ```
 #### Circuits
+
+#### LCD 
+For the LCD I used the circuit from the arduino [homepage](https://www.arduino.cc/en/Tutorial/HelloWorld).
+
 ##### I2C
 Pi GPiO 2 (SDA) - Arduino A4 (SDA)   
 Pi GPiO 3 (SCL) - Arduino A5 (SCL)  
 Pi GND 		- Arduino GND  
 
-### Lora
+## Lora
 #### Circuits
 Arduino Pin 4 - E32 M0  
 Arduino Pin 5 - E32 M1  
