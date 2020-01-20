@@ -1,11 +1,15 @@
 # Electronics Projects
-## Wiener Linien Abfahrtsmonitor
+## Wiener Linien Departures
 ![Title Image](https://github.com/gue-ni/electronics/blob/master/docs/img/img_2.jpg?raw=true)
+
+I used a raspberry pi and an arduino attached to an lcd to display when the tram leaves from the station near my apartment. The data comes from the official Wiener Linien API, which offers free 
+real-time data on all of its services.
+
 
 #### Crontab
 ```
-*/5 * * * * python /home/pi/arduino/pi/get_data.py # every 5 minutes
-* * * * *  python /home/pi/arduino/pi/i2c_send.py  # every minute
+*/5 * * * * python /home/pi/arduino/pi/wiener_linien_api.py # every 5 minutes
+* * * * *  python /home/pi/arduino/pi/wiener_linien_i2c.py  # every minute
 ```
 #### Circuits
 ##### I2C
