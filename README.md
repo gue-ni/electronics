@@ -1,6 +1,8 @@
 # Electronics Projects
 ## Wiener Linien Abfahrtsmonitor
-![Title Image] (docs/img/img_1.jpg)
+
+![header image](https://github.com/gue-ni/electronics/blob/master/docs/img/img_1.jpg?raw=true)
+
 #### Crontab
 ```
 */5 * * * * python /home/pi/arduino/pi/get_data.py # every 5 minutes
