@@ -1,6 +1,6 @@
 # Electronics Projects
 ## Wiener Linien Abfahrtsmonitor
-![alt text](https://github.com/gue-ni/electronics/docs/imgs/img_1.jpg "Logo Title Text 1")
+![Title Image] (docs/img/img_1.jpg)
 #### Crontab
 ```
 */5 * * * * python /home/pi/arduino/pi/get_data.py # every 5 minutes
